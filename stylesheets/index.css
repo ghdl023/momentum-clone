@@ -1,7 +1,54 @@
-
-.showing {
-    display:block;
+*{box-sizing: border-box; margin:0;}
+html{height:100%;}
+body{
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
 }
+
+.momentum{
+    text-align:center;
+}
+
+.clock{
+    font-size:45px;
+}
+
+.greeting{
+    font-size:22px;
+    margin-bottom: 30px;
+}
+
+.todo{
+    display:flex;
+    flex-direction: column;
+    position:relative;
+}
+
+.todo_title{
+    margin-bottom: 20px;
+    font-size:20px;
+}
+
+.todo_form .todo_input{
+    all:unset;
+    width:80%;
+    border-bottom:2px solid white;
+    font-size:25px;
+}
+
+.todo .toDoList{
+    position:absolute;
+    top:0;
+    right:-200px;
+}
+
+.toDoList li{
+    display:flex;
+}
+
 
 .hidden {
     display:none;
