@@ -9,18 +9,31 @@ function saveToDo(){
     localStorage.setItem('toDos',JSON.stringify(toDos));
 }
 
+// 삭제시 toDos 요소의 id만바꿔주면 기존 li의 id는 그대로기때문에 
+// 다시 삭제시 filter에서 비교할때 에러가 생긴다.
+// 여기서 li의 id값을 toDos요소의 id와 통일해줌
+function sortId(){
+    let currentChild = toDoList.firstChild;
+    for(var i=0; i<toDoList.childElementCount; i++){
+        currentChild.id = i+1;
+        console.log("$",currentChild.id);
+        currentChild = currentChild.nextSibling;
+    }
+}
+
 function deleteToDo(event){
     // alert('hi');
     const btn = event.target;
-    console.dir(btn);
+    // console.dir(btn);
     const li = btn.parentNode; 
+    console.log(`clicked li id = ${li.id}`);
     const cleanToDos = toDos.filter(function(element){  //filter는 모든요소에대해 검사하는데 true값을 반환하는것만 새로운 배열에 저장한다.
         //li.id 값은 string이다.
         console.log(element.id , li.id);
         return element.id !== parseInt(li.id); 
     });
 
-    console.log(cleanToDos);
+    console.log("cleanToDos = ",cleanToDos);
     toDoList.removeChild(li);
     toDos = cleanToDos;
     
@@ -29,7 +42,8 @@ function deleteToDo(event){
     for(var i=0; i<toDos.length; i++){
         toDos[i].id = i+1;
     }
-
+    
+    sortId(); // li의 id값을 새롭게 정의
     saveToDo();
 }
 
@@ -83,6 +97,7 @@ function loadToDo(){
 function init(){
     loadToDo();
     toDoForm.addEventListener("submit",submitToDo);
+    console.log(toDoList.childElementCount);
 }
 
 init();
